@@ -6,6 +6,8 @@
 
 
 def to_str(n: float) -> str:
-    # The `return str(n)` statement is converting the float
-    # `n` into a string representation.
+    """
+        The `return str(n)` statement is converting the float
+        `n` into a string representation.
+    """
     return str(n)
