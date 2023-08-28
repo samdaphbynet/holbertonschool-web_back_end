@@ -17,11 +17,14 @@ wait_random = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
+    """
+        The function creates multiple tasks that each wait for a
+        random delay and returns a list of the
+        delays.
+        :return: The code is returning a list of delays.
+    """
     async def wrapper():
         """
-            The above function creates multiple tasks that each wait
-            for a random delay, and then returns a
-            list of the delays.
             :return: The code is returning a list of delays.
         """
         return await wait_random(max_delay)
