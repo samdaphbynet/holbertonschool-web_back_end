@@ -5,9 +5,10 @@
 """
 import asyncio
 import random
+from typing import Generator
 
 
-async def async_generator():
+async def async_generator() -> Generator[float, None, None]:
     """
         The code is defining an asynchronous generator function
         called `async_generator()`
