@@ -30,8 +30,8 @@ class Pricing {
         return `${this.amount} ${this.currency.name} (${this.currency.code})`;
     }
 
-    static convertPrice(amount, conversionRate, targetCurrency) {
-        return new Pricing(amount * conversionRate, targetCurrency);
+    static convertPrice(amount, conversionRate) {
+        return (amount * conversionRate);
     }
 }
 
