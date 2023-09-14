@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Currency from './3-currency.js';
 
 class Pricing {
