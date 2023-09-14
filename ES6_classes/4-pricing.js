@@ -11,7 +11,9 @@ class Pricing {
     }
 
     set amount(value) {
-        this._amount = value;
+        if (typeof value === 'number') {
+            this._amount = value;
+        }
     }
 
     get currency() {
@@ -19,7 +21,9 @@ class Pricing {
     }
 
     set currency(value) {
-        this._currency = value;
+        if (currency instanceof Currency) {
+            this._currency = value;
+        }
     }
 
     displayFullPrice() {
