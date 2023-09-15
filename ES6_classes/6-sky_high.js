@@ -1,4 +1,4 @@
-import Building from "./5-building";
+import Building from "./5-building.js";
 
 
 class SkyHighBuilding extends Building {
@@ -8,8 +8,8 @@ class SkyHighBuilding extends Building {
     }
 
     get sqft() { 
-        return this._sqft 
-    };
+        return this._sqft;
+    }
 
     get floors() {
         return this._floors;
