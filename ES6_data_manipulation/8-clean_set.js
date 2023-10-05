@@ -16,5 +16,5 @@ export default function cleanSet(set, startString) {
     }
     return restString;
   }
-  return "";
+  return '';
 }
