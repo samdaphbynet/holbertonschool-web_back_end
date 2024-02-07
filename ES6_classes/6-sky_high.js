@@ -1,5 +1,5 @@
-import Building from "./5-building";
-
+/* eslint-disable */
+import Building from "./5-building.js";
 
 class SkyHighBuilding extends Building {
     constructor(sqft, floors) {
@@ -8,8 +8,8 @@ class SkyHighBuilding extends Building {
     }
 
     get sqft() { 
-        return this._sqft 
-    };
+        return this._sqft;
+    }
 
     get floors() {
         return this._floors;
