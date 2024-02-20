@@ -3,10 +3,11 @@
 function called filter_datum that returns the log message obfuscated
 """
 
-
+import mysql.connector
 import logging
 import re
 from typing import List
+from os import getenv
 
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
@@ -64,3 +65,18 @@ def get_logger() -> logging.Logger:
 
     logger.addHandler(streamHandler)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """
+    get_db: function that returns a connector to the database
+        (mysql.connector.connection.MySQLConnection object).
+    """
+    connection_db = mysql.connector.connection.MySQLConnection(
+        user=getenv("PERSONAL_DATA_DB_USERNAME", "root"),
+        password=getenv("PERSONAL_DATA_DB_PASSWORD", "root"),
+        host=getenv("PERSONAL_DATA_DB_HOST", "localhost"),
+        database=getenv("PERSONAL_DATA_DB_NAME",)
+    )
+
+    return connection_db
