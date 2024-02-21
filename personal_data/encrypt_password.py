@@ -22,7 +22,4 @@ def is_valid(hashed_passsword: bytes, password: str) -> bool:
         hashed_password: bytes type
         password: string type
     """
-    if (bcrypt.checkpw(password.encode('utf-8'), hashed_passsword)):
-        return True
-    else:
-        return False
+    return bcrypt.checkpw(password.encode('utf-8'), hashed_passsword)
