@@ -12,7 +12,11 @@ class Auth:
     """
     Auth class to manage the API authentication
     """
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
+        """
+        checks if the user is authorized to access the path
+        """
         return False
 
     def authorization_header(self, request=None) -> str:
