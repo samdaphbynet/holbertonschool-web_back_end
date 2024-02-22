@@ -10,7 +10,8 @@ class BasicAuth(Auth):
     Basic auth class to manage the API authentication
     """
 
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
         """
         function to extract the base64 encoded authorization header
         """
