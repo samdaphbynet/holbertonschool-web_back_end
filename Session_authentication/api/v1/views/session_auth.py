@@ -2,10 +2,10 @@
 """
 Module for the API Session Auth
 """
+from api.v1.views import app_views
 from os import getenv
 from flask import jsonify, request
 from models.user import User
-from api.v1.views import app_views
 
 
 @app_views.route("/auth_session/login", methods=["POST"], strict_slashes=False)
@@ -37,9 +37,9 @@ def login():
     user = find_user[0]
     session_id = auth.create_session(user.id)
 
-    session_name = getenv("SESSION_NAME")
+    SESSION_NAME = getenv("SESSION_NAME")
 
     response = jsonify(user.to_json())
-    response.set_cookie(session_name, session_id)
+    response.set_cookie(SESSION_NAME, session_id)
 
     return response
