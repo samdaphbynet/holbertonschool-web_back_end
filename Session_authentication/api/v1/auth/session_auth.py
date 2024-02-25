@@ -56,16 +56,17 @@ class SessionAuth(Auth):
         """
         function to destroy the session
         """
+        if request is None:
+            return False
+
         session_cookie = self.session_cookie(request)
-        if session_cookie is None:
+        if not session_cookie:
             return False
 
         _session_id = self.user_id_for_session_id(session_cookie)
         if not _session_id:
             return False
 
-        try:
-            del self.user_id_by_session_id[_session_id]
-        except Exception:
-            pass
+        del self.user_id_by_session_id[_session_id]
+
         return True
