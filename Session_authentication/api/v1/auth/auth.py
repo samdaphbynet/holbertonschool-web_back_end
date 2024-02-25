@@ -4,6 +4,7 @@ class to manage the API authentication
 """
 
 
+from os import getenv
 from flask import request
 from typing import List, TypeVar
 
@@ -42,3 +43,14 @@ class Auth:
         Validates the current user
         """
         return None
+
+    def session_cookie(self, request=None):
+        """
+        function to get the session cookie value from the request
+        """
+        if request is None:
+            return None
+
+        cookies_name = getenv("SESSION_NAME")
+
+        return request.cookies.get(cookies_name)
