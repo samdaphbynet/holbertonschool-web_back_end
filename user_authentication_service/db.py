@@ -46,14 +46,12 @@ class DB:
         """
         function to find a first user in the database
         """
-        try:
-            user = self._session.query(User).filter_by(**kwargs).first()
+        if not kwargs:
+            raise InvalidRequestError
 
-            if user is None:
-                raise NoResultFound("No user found")
+        user = self._session.query(User).filter_by(**kwargs).first()
 
-            return user
-        except NoResultFound:
-            raise
-        except InvalidRequestError:
-            raise
+        if user is None:
+            raise NoResultFound
+
+        return user
