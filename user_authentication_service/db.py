@@ -52,7 +52,6 @@ class DB:
             if user is None:
                 raise NoResultFound("No user found")
 
-            print("=============++>", user.id)
             return user
         except NoResultFound:
             raise
