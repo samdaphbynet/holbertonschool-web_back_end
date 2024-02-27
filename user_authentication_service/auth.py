@@ -5,7 +5,7 @@ Hash password
 import bcrypt
 
 
-def _hash_password(password) -> bytes:
+def _hash_password(password: str) -> str:
     """
     function to hash password using sha256 algorithm
     """
