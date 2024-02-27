@@ -2,8 +2,6 @@
 """
 Hash password
 """
-
-
 import bcrypt
 
 
