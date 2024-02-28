@@ -2,6 +2,7 @@
 """
 Hash password
 """
+import uuid
 import bcrypt
 from db import DB
 from user import User
@@ -40,6 +41,12 @@ class Auth:
                                   user.hashed_password)
         except NoResultFound:
             return False
+
+    def _generate_uuid() -> str:
+        """
+        function to generate a uuid for the user
+        """
+        return str(uuid.uuid4())
 
 
 def _hash_password(password: str) -> str:
