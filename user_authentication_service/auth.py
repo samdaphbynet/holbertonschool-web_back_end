@@ -4,7 +4,6 @@ Hash password
 """
 import uuid
 import bcrypt
-from requests import Session
 from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
@@ -43,7 +42,7 @@ class Auth:
         except NoResultFound:
             return False
 
-    def create_session(self, email: str) -> Session.id:
+    def create_session(self, email: str) -> str:
         """
         function to generate a session id for a user
         """
@@ -53,6 +52,7 @@ class Auth:
             return None
 
         session_id = _generate_uuid()
+        self._db.update_user(user.id, session_id=session_id)
         return session_id
 
 
