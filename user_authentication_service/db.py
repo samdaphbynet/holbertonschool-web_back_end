@@ -47,7 +47,7 @@ class DB:
         """
         function to find a first user in the database
         """
-        if not kwargs:
+        if kwargs is None:
             raise InvalidRequestError
 
         user = self._session.query(User).filter_by(**kwargs).first()
