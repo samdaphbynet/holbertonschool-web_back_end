@@ -39,8 +39,8 @@ def register_user():
     return jsonify({"email": email, "message": "user created"})
 
 
-@app.route("/sessions", methods=["POST"])
-def login():
+@app.route("/sessions", methods=["POST"], strict_slashes=False)
+def login() -> str:
     """
     function that repond to a login request
     """
@@ -59,19 +59,18 @@ def login():
         abort(401)
 
 
-@app.route("/sessions", methods=["DELETE"])
-def logout():
+@app.route("/sessions", methods=["DELETE"], strict_slashes=False)
+def logout() -> None:
     """
     function that responds to a logout request
     """
     session_id = request.cookies.get("session_id")
+    user_id = AUTH.get_user_from_session_id(session_id)
 
-    try:
-        user_id = AUTH.get_user_from_session_id(session_id)
-        AUTH.destroy_session(user_id)
-        return redirect("/")
-    except ValueError:
+    if not user_id:
         abort(403)
+    AUTH.destroy_session(user_id)
+    return redirect("/")
 
 
 if __name__ == "__main__":
