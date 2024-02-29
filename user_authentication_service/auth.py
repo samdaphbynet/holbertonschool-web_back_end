@@ -64,6 +64,13 @@ class Auth:
         else:
             return user
 
+    def destroy_session(self, user_id: int) -> None:
+        """
+        function to destroy the session
+        """
+        self._db.update_user(user_id, session_id=None)
+        return None
+
 
 def _generate_uuid() -> str:
     """
