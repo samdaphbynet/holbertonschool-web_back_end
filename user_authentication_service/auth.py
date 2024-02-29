@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Authentication Module """
+""" Authentication Module auth """
 
 from db import DB
 from user import User
