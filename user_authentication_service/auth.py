@@ -80,17 +80,15 @@ class Auth:
             return None
 
     def get_reset_password_token(self, email: str) -> str:
-        """
-        function to generate a reset password token
+        """ get_reset_password_token: returns a string representation of a UUID
         """
         try:
             user = self._db.find_user_by(email=email)
+            reset_token = _generate_uuid()
+            self._db.update_user(user.id, reset_token=reset_token)
+            return reset_token
         except NoResultFound:
             raise ValueError
-
-        token = _generate_uuid()
-        self._db.update_user(user.id, token=token)
-        return token
 
 
 def _generate_uuid() -> str:
