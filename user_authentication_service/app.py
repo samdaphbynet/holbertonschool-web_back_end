@@ -2,7 +2,7 @@
 """
 Flask application
 """
-from flask import Flask, abort, jsonify, request
+from flask import Flask, abort, jsonify, redirect, request
 from flask_cors import CORS, cross_origin
 from auth import Auth
 
@@ -69,6 +69,7 @@ def logout():
     try:
         user_id = AUTH.get_user_from_session_id(session_id)
         AUTH.destroy_session(user_id)
+        return redirect("/")
     except ValueError:
         abort(403)
 
