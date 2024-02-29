@@ -59,18 +59,19 @@ def login() -> str:
         abort(401)
 
 
-@app.route("/sessions", methods=["DELETE"], strict_slashes=False)
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout() -> None:
     """
     function that responds to a logout request
     """
-    session_id = request.cookies.get("session_id")
+    session_id = request.cookies.get('session_id')
     user_id = AUTH.get_user_from_session_id(session_id)
 
-    if not user_id:
+    if not user_id or not session_id:
         abort(403)
-    AUTH.destroy_session(user_id.id)
-    return redirect("/")
+    else:
+        AUTH.destroy_session(user_id.id)
+        return redirect('/')
 
 
 if __name__ == "__main__":
