@@ -1,4 +1,6 @@
-[Hero Image](https://github.com/samdaphbynet/holbertonschool-web_back_end/blob/main/i18n/heroReadme.png)
+<p align="center">
+    <img width="100%" height="400" src="heroReadme.png" alt="Material Bread logo">
+</p>
 
 # i18n
 
