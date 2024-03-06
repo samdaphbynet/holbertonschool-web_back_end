@@ -4,10 +4,9 @@ test access control
 """
 import unittest
 from parameterized import parameterized
-from utils import access_nested_map
+from utils import access_nested_map, get_json
 
 from unittest.mock import patch, Mock
-import utils
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -55,6 +54,6 @@ class TestGetJson(unittest.TestCase):
 
         # Call the function requests
         with patch('requests.get', return_value=mock_response):
-            r_response = utils.get_json(mock_get)
+            r_response = get_json(mock_get)
             self.assertEqual(r_response, test_payload)
-            mock_response.assert_called_once()
+            mock_response.json.assert_called_once()
