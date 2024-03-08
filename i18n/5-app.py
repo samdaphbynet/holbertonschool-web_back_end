@@ -38,22 +38,22 @@ def index():
     return render_template("5-index.html")
 
 
-# babel.init_app(app, locale_selector=get_locale)
-@babel.localeselector
+# @babel.localeselector
 def get_locale():
     """
     Get the current locale
     """
-
     locale_param = request.args.get("locale")
 
     if locale_param and locale_param in app.config["LANGUAGES"]:
         return locale_param
-
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
-def get_user(user_id):
+babel.init_app(app, locale_selector=get_locale)
+
+
+def get_user(user_id) -> Union[dict, None]:
     """
     function that get user by user_id
     """
@@ -77,4 +77,4 @@ def before_request():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
