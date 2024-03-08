@@ -38,7 +38,8 @@ def index():
     return render_template("6-index.html")
 
 
-# @babel.localeselector
+# babel.init_app(app, locale_selector=get_locale)
+@babel.localeselector
 def get_locale():
     """
     Get the current locale
@@ -47,10 +48,12 @@ def get_locale():
 
     if locale_param and locale_param in app.config["LANGUAGES"]:
         return locale_param
-    return request.accept_languages.best_match(app.config["LANGUAGES"])
 
-
-babel.init_app(app, locale_selector=get_locale)
+    elif g.user and g.user.get("locale")\
+            and g.user.get("locale") in app.config["LANGUAGES"]:
+        return g.user.get("locale")
+    else:
+        return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 def get_user(user_id) -> Union[dict, None]:
