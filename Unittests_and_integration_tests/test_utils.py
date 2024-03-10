@@ -4,7 +4,7 @@ test access control
 """
 import unittest
 from parameterized import parameterized
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 
 from unittest.mock import patch, Mock
 
@@ -57,3 +57,28 @@ class TestGetJson(unittest.TestCase):
             r_response = get_json(mock_get)
             self.assertEqual(r_response, test_payload)
             mock_response.json.assert_called_once()
+
+
+class TestMemoize(unittest.TestCase):
+    def test_memoize(self):
+        """ Tests memoize function """
+
+        class TestClass:
+            """ Test class """
+
+            def a_method(self):
+                """ Method to always return 42 """
+                return 42
+
+            @memoize
+            def a_property(self):
+                """ Returns memoized property """
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method', return_value=42) as patched:
+            test_class = TestClass()
+            real_return = test_class.a_property
+            real_return = test_class.a_property
+
+            self.assertEqual(real_return, 42)
+            patched.assert_called_once()
