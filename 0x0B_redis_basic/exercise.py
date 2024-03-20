@@ -10,19 +10,19 @@ from typing import Optional, Union, Callable
 from functools import wraps
 
 
-def count_calls(func: Callable) -> Callable:
+def count_calls(method: Callable) -> Callable:
     """
     function that count the number of calls
     """
 
-    @wraps(func)
+    @wraps(method)
     def wrapper(self, *args, **kwargs):
         """
         wrapper function that count the number of calls
         """
-        key = func.__qualname__
+        key = method.__qualname__
         self._redis.incr(key)
-        return func(self, *args, **kwargs)
+        return method(self, *args, **kwargs)
 
     return wrapper
 
