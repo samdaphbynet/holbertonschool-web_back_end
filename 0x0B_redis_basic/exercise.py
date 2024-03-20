@@ -6,7 +6,7 @@
 
 import redis
 import uuid
-from typing import Union, Callable
+from typing import Optional, Union, Callable
 from functools import wraps
 
 
@@ -23,6 +23,27 @@ def count_calls(func: Callable) -> Callable:
         key = func.__qualname__
         self._redis.incr(key)
         return func(self, *args, **kwargs)
+
+    return wrapper
+
+
+def call_history(func: Callable) -> Callable:
+    """ call history function that Storing lists
+    Args:
+        func (Callable)
+    Returns:
+        Callable
+    """
+    @wraps(func)
+    def wrapper(self, *args, **kwargs):
+        input = str(args)
+        self._redis.rpush(func.__qualname__ + ":inputs", input)
+
+        output = str(func(self, *args, **kwargs))
+        self._redis.rpush(func.__qualname__ + ":outputs", output)
+
+        return output
+
     return wrapper
 
 
@@ -37,6 +58,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: Union[int, bytes, str, float]) -> str:
         """
@@ -47,7 +69,7 @@ class Cache():
 
         return key
 
-    def get(self, key: str, fn: Callable = None)\
+    def get(self, key: str, fn: Optional[Callable] = None)\
             -> Union[str, int, bytes, float]:
         """
         function that return the string reading
