@@ -11,8 +11,6 @@ function calculateNumber(type, a, b) {
       return "Error";
     }
     return roundedA / roundedB;
-  } else {
-    throw new Error("Invalid operation type");
   }
 }
 
