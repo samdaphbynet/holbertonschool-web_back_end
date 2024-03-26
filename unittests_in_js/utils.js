@@ -15,4 +15,4 @@ const Utils = {
     }
   },
 };
-module.exports = calculateNumber;
+module.exports = Utils;
